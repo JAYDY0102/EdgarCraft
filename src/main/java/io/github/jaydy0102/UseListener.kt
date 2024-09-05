@@ -1,28 +1,82 @@
 package io.github.jaydy0102
 
+import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.attribute.Attribute
-import org.bukkit.entity.DragonFireball
-import org.bukkit.entity.Entity.Spigot
-import org.bukkit.entity.Pig
-import org.bukkit.entity.Projectile
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerItemConsumeEvent
 import org.bukkit.inventory.ItemStack
+import net.wesjd.anvilgui.AnvilGUI
 
 class UseListener : Listener{
     @EventHandler
     fun onPlayerItemConsume(event: PlayerItemConsumeEvent){
         val item = event.item
         val player = event.player
-        val loc = player.location
-        val yaw = player.yaw
-        val pitch = player.pitch
-        val playerData = event.player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+        val playerData = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
         if (item.isSimilar(ItemStack(Recipe.heartCrystalItemStack))){
-            playerData!!.baseValue += 2.0
+            if (playerData!!.baseValue == 60.0) {
+                player.sendMessage("${ChatColor.YELLOW}Max HP Reached")
+            }
+            else playerData.baseValue += 2.0
         }
-        if (item.isSimilar(ItemStack(Recipe.dragonFruitItemStack))) return
+        if (item.isSimilar(ItemStack(Recipe.warpCrystalItemStack))){
+            openAnvilGui(player)
+        }
+        if (item.isSimilar(ItemStack(Recipe.homingCrystalItemStack))){
+            openAnvilGui1(player)
+        }
+    }
+    private fun openAnvilGui(player: Player) {
+        AnvilGUI.Builder()
+            .onClick { slot, stateSnapshot ->  // Either use sync or async variant, not both
+                if (slot !== AnvilGUI.Slot.OUTPUT) {
+                    return@onClick emptyList()
+                }
+                val text = stateSnapshot.text
+                val targetPlayer = Bukkit.getPlayer(text)
+                val playerName = player.name
+                if (targetPlayer != null && targetPlayer.isOnline) {
+                    openAcceptGui(targetPlayer)
+                    EdgarMain.instance.config.set("current-warp-player",playerName)
+                    return@onClick listOf(AnvilGUI.ResponseAction.close())
+                } else {
+                    return@onClick listOf(AnvilGUI.ResponseAction.replaceInputText("Try again"))
+                }
+            }
+            .text("Enter Player Name")
+            .title("Teleport - Warp")
+            .plugin(EdgarMain.instance)
+            .open(player)
+    }
+    private fun openAnvilGui1(player: Player) {
+        AnvilGUI.Builder()
+            .onClick { slot, stateSnapshot ->  // Either use sync or async variant, not both
+                if (slot !== AnvilGUI.Slot.OUTPUT) {
+                    return@onClick emptyList()
+                }
+                val text = stateSnapshot.text
+                val targetPlayer = Bukkit.getPlayer(text)
+                val playerName = player.name
+                if (targetPlayer != null && targetPlayer.isOnline) {
+                    openAcceptGui1(targetPlayer)
+                    EdgarMain.instance.config.set("current-homing-player",playerName)
+                    return@onClick listOf(AnvilGUI.ResponseAction.close())
+                } else {
+                    return@onClick listOf(AnvilGUI.ResponseAction.replaceInputText("Try again"))
+                }
+            }
+            .text("Enter Player Name")
+            .title("Teleport - Homing")
+            .plugin(EdgarMain.instance)
+            .open(player)
+    }
+    private fun openAcceptGui(targetPlayer: Player) {
+        targetPlayer.openInventory(Gui.inv1)
+    }
+    private fun openAcceptGui1(targetPlayer: Player) {
+        targetPlayer.openInventory(Gui.inv2)
     }
 }

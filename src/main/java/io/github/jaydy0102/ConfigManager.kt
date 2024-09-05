@@ -7,4 +7,10 @@ object ConfigManager {
         get() = config.getInt("ban-duration")
     val defaultLives: Double
         get() = config.getDouble("default-lives")
+    val currentWarpPlayer: String
+        get() = config.getString("current-warp-player") as String
+    val currentHomingPlayer: String
+        get() = config.getString("current-homing-player") as String
+    val endbanned: Boolean
+        get() = config.getBoolean("end-banned")
 }
