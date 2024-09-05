@@ -16,13 +16,15 @@ allprojects {
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.dmulloy2.net/nexus/repository/public/")
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-            name = "sonatype-oss-snapshots"
+        maven("https://repo.codemc.io/repository/maven-snapshots/")
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven("https://repo.codemc.io/repository/maven-snapshots/"){
         }
     }
     dependencies {
-        compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
-        compileOnly("com.comphenix.protocol:ProtocolLib:5.2.0-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+        implementation("com.comphenix.protocol:ProtocolLib:5.2.0-SNAPSHOT")
+        implementation("net.wesjd:anvilgui:1.10.0-SNAPSHOT")
     }
 
     java {
