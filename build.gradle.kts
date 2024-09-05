@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.jaydy0102"
-version = "1.0-SNAPSHOT"
+version = "1.1.0"
 
 allprojects {
     apply(plugin = "java")
@@ -22,9 +22,9 @@ allprojects {
         }
     }
     dependencies {
-        compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
         implementation("com.comphenix.protocol:ProtocolLib:5.2.0-SNAPSHOT")
-        implementation("net.wesjd:anvilgui:1.10.0-SNAPSHOT")
+        implementation("net.wesjd:anvilgui:1.10.2-SNAPSHOT")
     }
 
     java {
