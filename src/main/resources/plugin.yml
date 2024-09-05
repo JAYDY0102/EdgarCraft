@@ -1,7 +1,7 @@
 name: EdgarCraft
-version: 1.0.0
+version: 1.1.0
 main: io.github.jaydy0102.EdgarMain
 description: Lifesteal and some extra
-author: PaperMC
+author: JAYDY0102
 website: https://papermc.io
-api-version: '1.20'
+api-version: '1.21'

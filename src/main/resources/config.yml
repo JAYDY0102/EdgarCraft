@@ -1,2 +1,5 @@
 ban-duration: 480
 default-lives: 6.0
+current-warp-player: ""
+current-homing-player: ""
+end-banned: true
