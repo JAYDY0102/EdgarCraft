@@ -12,3 +12,4 @@ Features:
 - Resize on Start: Opens a GUI to choose between different player sizes, (Small, Normal, Big) all with their own benefits
 - End Dimension ban: End dimension banned until changed in config.yml 
 - Version 1.21.1
+- Relies on Protocollib and AnvilGUI, both implemented in plugin; Dependencies not seperately required
