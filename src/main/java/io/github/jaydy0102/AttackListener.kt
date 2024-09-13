@@ -30,11 +30,12 @@ class AttackListener : Listener {
         val item = event.player.inventory.itemInMainHand
         val meta = item.itemMeta
 
-        if (player.itemInHand.type == Material.NETHERITE_SWORD) {
+        if (item.type == Material.NETHERITE_SWORD) {
             if (item.itemMeta.hasCustomModelData()) {
                 if (meta.customModelData == 1) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.INSTANT_HEALTH, 20, 0, true, true))
                     if (entity.type == EntityType.ARMOR_STAND) {
+                        return
                     } else if (entity is LivingEntity)
                     player.giveExp(1, true)
                 }

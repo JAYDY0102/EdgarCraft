@@ -1,7 +1,8 @@
 package io.github.jaydy0102
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -18,7 +19,7 @@ class UseListener : Listener{
         val playerData = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
         if (item.isSimilar(ItemStack(Recipe.heartCrystalItemStack))){
             if (playerData!!.baseValue == 60.0) {
-                player.sendMessage("${ChatColor.YELLOW}Max HP Reached")
+                player.sendMessage(Component.text("Max HP Reached", TextColor.color(255,255,0)))
             }
             else playerData.baseValue += 2.0
         }

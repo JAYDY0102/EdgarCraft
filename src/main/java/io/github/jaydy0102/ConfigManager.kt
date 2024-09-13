@@ -3,8 +3,10 @@ package io.github.jaydy0102
 object ConfigManager {
     private val config = EdgarMain.instance.config
 
-    val banDuration: Int
-        get() = config.getInt("ban-duration")
+    val banDurationLong: Long
+        get() = config.getLong("ban-duration")
+    val banDurationString: String
+        get() = config.getString("ban-duration") as String
     val defaultLives: Double
         get() = config.getDouble("default-lives")
     val currentWarpPlayer: String

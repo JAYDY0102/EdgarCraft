@@ -7,19 +7,20 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.PlayerDeathEvent
+import java.time.Duration
 import kotlin.random.Random.Default.nextInt
-import java.util.*
 
 class DeathListener : Listener {
     @EventHandler
     fun onPlayerDeath(e: PlayerDeathEvent) {
         // REMOVE A LIFE
         val player = e.entity
+        val banperiodstring = ConfigManager.banDurationString
+        val banperiodlong = ConfigManager.banDurationLong
         val victimHearts = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
 
         if (victimHearts!!.baseValue == 0.0) {
-            Bukkit.getScheduler().runTaskLater(EdgarMain.instance, Runnable {
-                player.banPlayer("No more lives. Rejoin in 12 hours to revive with 3 hearts.", Calendar.getInstance().apply { add(Calendar.MINUTE, ConfigManager.banDuration) }.time) }, 1)
+            player.ban("No more lives. Rejoin in $banperiodstring minutes to revive with 3 hearts.", Duration.ofMinutes(banperiodlong), null, true)
         }
         else victimHearts.baseValue -= 2.0
 

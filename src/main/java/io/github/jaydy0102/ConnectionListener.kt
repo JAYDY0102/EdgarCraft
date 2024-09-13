@@ -1,7 +1,9 @@
 package io.github.jaydy0102
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent
-import net.md_5.bungee.api.ChatColor
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
@@ -14,7 +16,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.util.NumberConversions
-import java.awt.Color
 import java.util.*
 import kotlin.random.Random.Default.nextInt
 
@@ -24,7 +25,7 @@ class ConnectionListener : Listener {
         val t = Calendar.getInstance(TimeZone.getTimeZone("GMT+9"))
         event.numPlayers = t.get(Calendar.YEAR) * 10000 + (t.get(Calendar.MONTH) + 1) * 100 + t.get(Calendar.DAY_OF_MONTH)
         event.maxPlayers = t.get(Calendar.HOUR) * 10000 + t.get(Calendar.MINUTE) * 100 + t.get(Calendar.SECOND)
-        event.motd = "${ChatColor.of(Color(nextInt(0xFFFFFF)))}${ChatColor.BOLD}LifeSteal Survival"
+        event.motd(Component.text("LifeSteal Survival", TextColor.color((nextInt(0xFFFFFF))),TextDecoration.BOLD))
         event.listedPlayers.clear()
         if (event.client.protocolVersion == -1) {
             event.isCancelled
@@ -114,7 +115,7 @@ class ConnectionListener : Listener {
         if (world.environment == World.Environment.THE_END) {
             if (open) {
                 player.teleport(getSpawnLocation(player.name))
-                player.sendMessage("${ChatColor.YELLOW}END IS UNAVAILABLE UNTIL THE END EVENT")
+                player.sendMessage("${Component.text("END IS UNAVAILABLE", TextColor.color(255,255,0), TextDecoration.BOLD)}")
             }
         }
     }
