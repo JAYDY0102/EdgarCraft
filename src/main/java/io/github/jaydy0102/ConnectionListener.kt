@@ -34,8 +34,8 @@ class ConnectionListener : Listener {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
         val player = event.player
-        if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.baseValue==0.0)
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.baseValue=ConfigManager.defaultLives
+        if (player.getAttribute(Attribute.MAX_HEALTH)!!.baseValue==0.0)
+            player.getAttribute(Attribute.MAX_HEALTH)!!.baseValue=ConfigManager.defaultLives
         if (!player.hasPlayedBefore()) {
             player.teleport(getSpawnLocation(player.name))
             player.openInventory(Gui.inv) }
@@ -47,11 +47,11 @@ class ConnectionListener : Listener {
         val player = event.whoClicked as Player
         val target = Bukkit.getPlayer(ConfigManager.currentWarpPlayer) as Player
         val target1 = Bukkit.getPlayer(ConfigManager.currentHomingPlayer) as Player
-        val scale = player.getAttribute(Attribute.GENERIC_SCALE)
-        val speed = player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)
-        val jump = player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH)
-        val stepheight = player.getAttribute(Attribute.GENERIC_STEP_HEIGHT)
-        val gravity = player.getAttribute(Attribute.GENERIC_GRAVITY)
+        val scale = player.getAttribute(Attribute.SCALE)
+        val speed = player.getAttribute(Attribute.MOVEMENT_SPEED)
+        val jump = player.getAttribute(Attribute.JUMP_STRENGTH)
+        val stepheight = player.getAttribute(Attribute.STEP_HEIGHT)
+        val gravity = player.getAttribute(Attribute.GRAVITY)
         if (event.inventory == Gui.inv) {
             if (clickedItem != null) {
                 if (clickedItem.itemMeta.hasCustomModelData()) {

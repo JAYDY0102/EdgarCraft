@@ -17,7 +17,7 @@ class DeathListener : Listener {
         val player = e.entity
         val banperiodstring = ConfigManager.banDurationString
         val banperiodlong = ConfigManager.banDurationLong
-        val victimHearts = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+        val victimHearts = player.getAttribute(Attribute.MAX_HEALTH)
 
         if (victimHearts!!.baseValue == 0.0) {
             player.ban("No more lives. Rejoin in $banperiodstring minutes to revive with 3 hearts.", Duration.ofMinutes(banperiodlong), null, true)
@@ -27,7 +27,7 @@ class DeathListener : Listener {
         // ADD A LIFE IF KILLER
         val killer = e.player.killer ?: return
         if (killer.uniqueId == player.uniqueId) return
-        val killerHearts = killer.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+        val killerHearts = killer.getAttribute(Attribute.MAX_HEALTH)
         if (killerHearts!!.baseValue < 60.0) {
             killerHearts.baseValue += 2.0
         }

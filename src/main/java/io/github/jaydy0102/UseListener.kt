@@ -10,13 +10,15 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerItemConsumeEvent
 import org.bukkit.inventory.ItemStack
 import net.wesjd.anvilgui.AnvilGUI
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class UseListener : Listener{
     @EventHandler
     fun onPlayerItemConsume(event: PlayerItemConsumeEvent){
         val item = event.item
         val player = event.player
-        val playerData = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+        val playerData = player.getAttribute(Attribute.MAX_HEALTH)
         if (item.isSimilar(ItemStack(Recipe.heartCrystalItemStack))){
             if (playerData!!.baseValue == 60.0) {
                 player.sendMessage(Component.text("Max HP Reached", TextColor.color(255,255,0)))
@@ -28,6 +30,12 @@ class UseListener : Listener{
         }
         if (item.isSimilar(ItemStack(Recipe.homingCrystalItemStack))){
             openAnvilGui1(player)
+        }
+        if (item.isSimilar(ItemStack(Recipe.enchantedDiamondAppleItemStack))){
+            player.addPotionEffect(PotionEffect(PotionEffectType.ABSORPTION, 3600, 4, true))
+            player.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,600,2,true))
+            player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE,6000,0,true))
+            player.addPotionEffect(PotionEffect(PotionEffectType.RESISTANCE,6000,2,true))
         }
     }
     private fun openAnvilGui(player: Player) {
