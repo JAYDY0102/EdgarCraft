@@ -11,5 +11,5 @@ Features:
     - Change dl=0 to dl=1 at the end to use as server resource pack
 - Resize on Start: Opens a GUI to choose between different player sizes, (Small, Normal, Big) all with their own benefits
 - End Dimension ban: End dimension banned until changed in config.yml 
-- Version 1.21.1
+- Version 1.21.4
 - Relies on Protocollib and AnvilGUI, both implemented in plugin; Dependencies not seperately required
